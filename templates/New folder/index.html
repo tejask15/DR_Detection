@@ -1,0 +1,59 @@
+{% extends "base.html" %} {% block content %}
+ <div class="main">
+	<h1>Diabetic Retinopathy Detection</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+     <form action="{{ url_for('predict')}}" id="upload-file" method="post" enctype="multipart/form-data">
+        <label for="imageUpload" class="upload-label">
+            Choose...
+        </label>
+        <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
+    
+      <label>Name : </label>
+      <input type="text" name="name" class="box" placeholder="Enter Name" required="required" ></br>
+      <label>Age : </label>
+    	<input type="text" name="page" class="box" placeholder="Enter your Age" required="required"><br>
+      <br>
+    <label>Gender :</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" id="male" name="gender" value="male" required="required">
+    <label for="male">Male</label>
+    <input type="radio" id="female" name="gender" value="female" required="required">
+    <label for="female">Female</label>
+    <input type="radio" id="others" name="gender" value="others" required="required">
+    <label for="others">Others</label><br>
+    <br>
+    <label>Aadhar Number : </label> &nbsp;&nbsp;
+    <input type="text" name="padhar" class="box" placeholder="Enter your Aadhar Number" required="required"><br>
+    <br>
+    <label>Phone No : </label>
+      <input type="text" name="phno" class="box" placeholder="Enter your Phone Number" required="required"><br>
+    <br>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+   <br>
+   <br>
+   {{ prediction_text }}
+
+ </div>
+  <center><h3>Normal</h3><img src="{{ user_image_normal }}" alt="Normal" height="240px" width="200px"></center>
+
+ <center><h3>Proc</h3><img src="{{ user_image }}" alt="Proc" height="240px" width="200px"></center>
+
+<div class="image-section" style="display:none;">
+        <div class="img-preview">
+            <div id="imagePreview">
+            </div>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Predict!</button>
+        </div>
+    </div>
+
+    <div class="loader" style="display:none;"></div>
+
+    <h3 id="result">
+        <span> </span>
+    </h3>
+{% endblock %}
+
